@@ -11,8 +11,6 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import jakarta.servlet.Filter;
-
 import static com.example.SpringSecurityJWT.User.Permission.*;
 import static com.example.SpringSecurityJWT.User.Role.ADMIN;
 import static com.example.SpringSecurityJWT.User.Role.MEMBER;
@@ -43,7 +41,7 @@ public class SecurityConfiguration {
                                 .authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
                 .authenticationProvider(authenticationProvider)
-                .addFilterBefore((Filter)jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 }
